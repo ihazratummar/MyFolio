@@ -1,0 +1,108 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { navLinks } from "@/data/portfolio";
+import { HireMeModal } from "@/components/modals/HireMeModal";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+export const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const getHref = (href: string) => {
+        if (pathname === "/") return href;
+        return href.startsWith("#") ? `/${href}` : href;
+    };
+
+    return (
+        <>
+            <motion.nav
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.5 }}
+                className={cn(
+                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+                    isScrolled
+                        ? "bg-background/80 backdrop-blur-md border-b border-white/10 py-4"
+                        : "bg-transparent py-6"
+                )}
+            >
+                <div className="container mx-auto px-6 flex items-center justify-between">
+                    <Link href="/" className="text-2xl font-bold font-heading tracking-tighter">
+                        Hazrat<span className="text-primary">.dev</span>
+                    </Link>
+
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex items-center space-x-8">
+                        {navLinks.map((link, index) => (
+                            <Link
+                                key={index}
+                                href={getHref(link.href)}
+                                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
+                            >
+                                {link.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                            </Link>
+                        ))}
+                        <Button variant="default" className="bg-primary hover:bg-primary/90 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                            Hire Me
+                        </Button>
+                    </div>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="md:hidden text-foreground"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X /> : <Menu />}
+                    </button>
+                </div>
+            </motion.nav>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl pt-24 px-6 md:hidden"
+                    >
+                        <div className="flex flex-col space-y-6">
+                            {navLinks.map((link, index) => (
+                                <Link
+                                    key={index}
+                                    href={getHref(link.href)}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                            <HireMeModal>
+                                <Button className="w-full bg-primary hover:bg-primary/90 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                                    Hire Me
+                                </Button>
+                            </HireMeModal>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
+    );
+};
