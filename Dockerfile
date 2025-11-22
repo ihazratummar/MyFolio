@@ -38,14 +38,25 @@ ENV ADMIN_PASSWORD=${ADMIN_PASSWORD}
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Debug: Show node version and environment
+RUN echo "Node version: $(node --version)" && \
+    echo "NPM version: $(npm --version)" && \
+    echo "MongoDB URI set: ${MONGODB_URI:+YES}" && \
+    echo "Admin password set: ${ADMIN_PASSWORD:+YES}"
+
+# Run build with error handling
 RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; fi
+  if [ -f yarn.lock ]; then \
+    echo "Building with Yarn..." && yarn run build; \
+  elif [ -f package-lock.json ]; then \
+    echo "Building with NPM..." && npm run build 2>&1 | tee build.log || (cat build.log && exit 1); \
+  elif [ -f pnpm-lock.yaml ]; then \
+    echo "Building with PNPM..." && corepack enable pnpm && pnpm run build; \
+  else \
+    echo "ERROR: Lockfile not found." && exit 1; \
+  fi
 
 # Production image, copy all the files and run next
 FROM base AS runner

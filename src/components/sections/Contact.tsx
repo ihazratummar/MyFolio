@@ -146,7 +146,19 @@ export const Contact = () => {
                             <div className="pt-6 border-t border-white/10">
                                 <h4 className="font-bold mb-4">Hire me on</h4>
                                 <div className="flex flex-wrap gap-4">
-                                    {socials.filter(s => s.name === "Fiverr" || s.name === "Upwork" || s.name === "Freelancer").map((link, index) => (
+                                    {/* Fiverr - Always visible */}
+                                    <a
+                                        href="https://www.fiverr.com/hazratummar"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-green-600/20 to-green-500/20 hover:from-green-600/30 hover:to-green-500/30 border border-green-500/30 transition-all group"
+                                    >
+                                        <span className="font-medium text-green-400 transition-colors">Fiverr</span>
+                                        <ExternalLink className="w-4 h-4 text-green-400 group-hover:text-green-300 transition-colors" />
+                                    </a>
+
+                                    {/* Other platforms from database */}
+                                    {socials.filter(s => s.name === "Upwork" || s.name === "Freelancer").map((link, index) => (
                                         <a
                                             key={index}
                                             href={link.href}
