@@ -5,8 +5,13 @@ import Social from "@/models/Social";
 import { getIcon } from "@/lib/utils/icons";
 
 export const Footer = async () => {
-    await dbConnect();
-    const socials = await Social.find({});
+    let socials = [];
+    try {
+        await dbConnect();
+        socials = await Social.find({});
+    } catch (error) {
+        console.error("Failed to fetch socials:", error);
+    }
 
     return (
         <footer className="bg-background border-t border-white/10 py-12">
