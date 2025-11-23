@@ -6,8 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getIcon } from "@/lib/utils/icons";
-import { PricingModal } from "@/components/modals/PricingModal";
-import { HireMeModal } from "@/components/modals/HireMeModal";
+import { ServiceDetailsModal } from "@/components/modals/ServiceDetailsModal";
 
 const DiscordIcon = ({ className }: { className?: string }) => (
     <img src="/discord.svg" alt="Discord" className={className} />
@@ -18,55 +17,22 @@ const services = [
         title: "Discord Bot Development",
         category: "Development",
         description: "Custom bots with advanced features, moderation tools, and API integrations tailored to your community needs.",
-        price: "From $50",
-        icon: "Bot",
-        tiers: [
-            {
-                name: "Basic Bot",
-                price: "$50",
-                description: "Essential moderation and utility commands.",
-                features: ["Moderation Commands", "Welcome System", "Auto-Role", "Uptime 99.9%"],
-                popular: false
-            },
-            {
-                name: "Advanced Bot",
-                price: "$150",
-                description: "Custom features, API integrations, and database support.",
-                features: ["All Basic Features", "Database Integration", "Custom API", "Economy System", "Ticket System"],
-                popular: true
-            },
-            {
-                name: "Enterprise Bot",
-                price: "$300+",
-                description: "Full-scale bot for large communities with dashboard.",
-                features: ["All Advanced Features", "Web Dashboard", "Payment Integration", "Priority Support", "Custom Branding"],
-                popular: false
-            }
-        ]
+        price: "Starts from $50",
+        icon: "Bot"
     },
     {
-        title: "Mobile App Development",
+        title: "Native Android Development",
         category: "Development",
-        description: "Native and cross-platform mobile applications built with React Native for iOS and Android.",
-        price: "From $500",
-        icon: "Smartphone",
-        tiers: []
+        description: "High-performance native Android applications built with Kotlin and Jetpack Compose.",
+        price: "Starts from $200",
+        icon: "Smartphone"
     },
     {
         title: "Backend Development",
         category: "Development",
-        description: "Robust and scalable backend systems using Node.js, Express, and MongoDB.",
-        price: "From $300",
-        icon: "Server",
-        tiers: []
-    },
-    {
-        title: "UI/UX Design",
-        category: "Design",
-        description: "Modern and intuitive user interface designs that enhance user experience.",
-        price: "From $200",
-        icon: "Palette",
-        tiers: []
+        description: "Robust and scalable backend systems using FastAPI, KTOR, and MongoDB.",
+        price: "Starts from $150",
+        icon: "Server"
     }
 ];
 
@@ -89,7 +55,7 @@ export const Services = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {services.map((service, index) => {
                         const Icon = service.title === "Discord Bot Development" ? DiscordIcon : getIcon(service.icon);
                         return (
@@ -123,19 +89,11 @@ export const Services = () => {
                                         </div>
                                     </CardContent>
                                     <CardFooter>
-                                        {service.tiers && service.tiers.length > 0 ? (
-                                            <PricingModal serviceType={service.title as any}>
-                                                <Button className="w-full bg-white/5 hover:bg-primary hover:text-white text-foreground border border-white/10 transition-all duration-300">
-                                                    View Plans
-                                                </Button>
-                                            </PricingModal>
-                                        ) : (
-                                            <HireMeModal>
-                                                <Button className="w-full bg-white/5 hover:bg-primary hover:text-white text-foreground border border-white/10 transition-all duration-300">
-                                                    Get Started
-                                                </Button>
-                                            </HireMeModal>
-                                        )}
+                                        <ServiceDetailsModal serviceType={service.title}>
+                                            <Button className="w-full bg-white/5 hover:bg-primary hover:text-white text-foreground border border-white/10 transition-all duration-300">
+                                                Get Started
+                                            </Button>
+                                        </ServiceDetailsModal>
                                     </CardFooter>
                                 </Card>
                             </motion.div>
