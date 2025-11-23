@@ -1,19 +1,23 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { verifyToken } from '@/lib/session';
 
-export function middleware(request: NextRequest) {
-    // Check if the path starts with /admin
+export async function middleware(request: NextRequest) {
+    // Only run on /admin routes
     if (request.nextUrl.pathname.startsWith('/admin')) {
-        // Skip middleware for login page
-        if (request.nextUrl.pathname === '/admin/login') {
+        // Allow access to login and callback without session
+        if (
+            request.nextUrl.pathname === '/admin/login' ||
+            request.nextUrl.pathname === '/admin/oauth2callback'
+        ) {
             return NextResponse.next();
         }
 
-        // Check for auth cookie
-        const authCookie = request.cookies.get('admin_session');
+        // Verify session for all other /admin routes
+        const token = request.cookies.get('admin_session')?.value;
+        const session = token ? await verifyToken(token) : null;
 
-        // If no cookie, redirect to login
-        if (!authCookie || authCookie.value !== 'true') {
+        if (!session) {
             return NextResponse.redirect(new URL('/admin/login', request.url));
         }
     }
