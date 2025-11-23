@@ -19,6 +19,9 @@ export async function GET(request: NextRequest) {
 
         const ip = request.headers.get("x-forwarded-for") || request.ip || "Unknown";
 
+        // Use BASE_URL from env or fallback to request.url for local dev
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || request.url;
+
         if (payload?.email === "hazratummar9@gmail.com") {
             const token = await createToken(payload.email);
 
@@ -38,7 +41,7 @@ export async function GET(request: NextRequest) {
                 ip
             });
 
-            return NextResponse.redirect(new URL("/admin", request.url));
+            return NextResponse.redirect(new URL("/admin", baseUrl));
         } else {
             await sendDiscordWebhook({
                 email: payload?.email || "Unknown",
@@ -47,7 +50,7 @@ export async function GET(request: NextRequest) {
                 success: false,
                 ip
             });
-            return NextResponse.redirect(new URL("/admin/unauthorized", request.url));
+            return NextResponse.redirect(new URL("/admin/unauthorized", baseUrl));
         }
     } catch (error) {
         console.error("OAuth Error:", error);
