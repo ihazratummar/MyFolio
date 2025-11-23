@@ -10,7 +10,8 @@ interface Project {
     _id: string;
     title: string;
     category: string;
-    image: string;
+    images: string[];
+    image?: string;
 }
 
 export default function ProjectsAdmin() {
@@ -68,8 +69,12 @@ export default function ProjectsAdmin() {
                         <div className="h-48 bg-muted relative">
                             {/* Placeholder for image */}
                             <div className="absolute inset-0 bg-white/5 flex items-center justify-center text-muted-foreground">
-                                {project.image ? (
-                                    <div className="w-full h-full bg-gray-800" />
+                                {(project.images && project.images.length > 0) || project.image ? (
+                                    <img
+                                        src={(project.images && project.images.length > 0) ? project.images[0] : project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover"
+                                    />
                                 ) : "No Image"}
                             </div>
                         </div>
