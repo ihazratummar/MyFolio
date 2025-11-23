@@ -85,8 +85,12 @@ export const Testimonials = () => {
                                         "{review.content}"
                                     </p>
                                     <div className="flex items-center gap-4 pt-4 border-t border-white/5">
-                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg">
-                                            {review.name.charAt(0)}
+                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg overflow-hidden">
+                                            {review.image ? (
+                                                <img src={review.image} alt={review.name} className="w-full h-full object-cover" />
+                                            ) : (
+                                                review.name.charAt(0)
+                                            )}
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-sm">{review.name}</h4>

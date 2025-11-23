@@ -4,13 +4,14 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plus, Pencil, Trash2, Share2 } from "lucide-react";
+import { Plus, Pencil, Trash2 } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface Social {
     _id: string;
-    platform: string;
-    url: string;
+    name: string;
+    href: string;
     icon: string;
 }
 
@@ -83,6 +84,11 @@ export default function SocialsAdmin() {
         setIsDialogOpen(true);
     };
 
+    const renderIcon = (iconName: string) => {
+        const Icon = (LucideIcons as any)[iconName];
+        return Icon ? <Icon className="w-5 h-5" /> : <LucideIcons.Share2 className="w-5 h-5" />;
+    };
+
     if (loading) return <div>Loading...</div>;
 
     return (
@@ -101,13 +107,13 @@ export default function SocialsAdmin() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-3">
                                 <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                                    <Share2 className="w-5 h-5" />
+                                    {renderIcon(social.icon)}
                                 </div>
-                                <span className="truncate">{social.platform}</span>
+                                <span className="truncate">{social.name}</span>
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-sm text-muted-foreground mb-4 truncate">{social.url}</p>
+                            <p className="text-sm text-muted-foreground mb-4 truncate">{social.href}</p>
                             <div className="flex justify-end gap-2">
                                 <Button variant="outline" size="sm" onClick={() => openEditDialog(social)} className="border-white/10 hover:bg-white/5">
                                     <Pencil className="w-4 h-4 mr-2" />
@@ -134,10 +140,10 @@ export default function SocialsAdmin() {
                     </DialogHeader>
                     <form onSubmit={handleSave} className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">Platform</label>
+                            <label className="text-sm font-medium">Platform Name</label>
                             <Input
-                                value={currentSocial.platform || ""}
-                                onChange={(e) => setCurrentSocial({ ...currentSocial, platform: e.target.value })}
+                                value={currentSocial.name || ""}
+                                onChange={(e) => setCurrentSocial({ ...currentSocial, name: e.target.value })}
                                 placeholder="GitHub, LinkedIn, Twitter"
                                 required
                                 className="bg-white/5 border-white/10"
@@ -146,8 +152,8 @@ export default function SocialsAdmin() {
                         <div className="space-y-2">
                             <label className="text-sm font-medium">URL</label>
                             <Input
-                                value={currentSocial.url || ""}
-                                onChange={(e) => setCurrentSocial({ ...currentSocial, url: e.target.value })}
+                                value={currentSocial.href || ""}
+                                onChange={(e) => setCurrentSocial({ ...currentSocial, href: e.target.value })}
                                 placeholder="https://..."
                                 required
                                 className="bg-white/5 border-white/10"
@@ -162,6 +168,9 @@ export default function SocialsAdmin() {
                                 required
                                 className="bg-white/5 border-white/10"
                             />
+                            <p className="text-xs text-muted-foreground">
+                                Enter the exact name of the Lucide icon (e.g., "Github", "Twitter", "Linkedin").
+                            </p>
                         </div>
                         <div className="flex justify-end gap-2">
                             <Button type="button" variant="ghost" onClick={() => setIsDialogOpen(false)}>Cancel</Button>

@@ -1,4 +1,5 @@
 import { verifyGoogleToken } from "@/lib/google";
+import { sendDiscordWebhook } from "@/lib/discord";
 import { createToken } from "@/lib/session";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -16,6 +17,8 @@ export async function GET(request: NextRequest) {
     try {
         const payload = await verifyGoogleToken(code);
 
+        const ip = request.headers.get("x-forwarded-for") || request.ip || "Unknown";
+
         if (payload?.email === "hazratummar9@gmail.com") {
             const token = await createToken(payload.email);
 
@@ -23,13 +26,28 @@ export async function GET(request: NextRequest) {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'lax',
-                maxAge: 60 * 60 * 24, // 24 hours
+                maxAge: 60 * 30, // 30 minutes
                 path: '/',
+            });
+
+            await sendDiscordWebhook({
+                email: payload.email,
+                name: payload.name,
+                picture: payload.picture,
+                success: true,
+                ip
             });
 
             return NextResponse.redirect(new URL("/admin", request.url));
         } else {
-            return NextResponse.json({ error: "Access Denied: Unauthorized email" }, { status: 403 });
+            await sendDiscordWebhook({
+                email: payload?.email || "Unknown",
+                name: payload?.name,
+                picture: payload?.picture,
+                success: false,
+                ip
+            });
+            return NextResponse.redirect(new URL("/admin/unauthorized", request.url));
         }
     } catch (error) {
         console.error("OAuth Error:", error);

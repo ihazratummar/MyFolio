@@ -20,6 +20,18 @@ export async function middleware(request: NextRequest) {
         if (!session) {
             return NextResponse.redirect(new URL('/admin/login', request.url));
         }
+
+        // Sliding session: Extend cookie expiration
+        const response = NextResponse.next();
+        response.cookies.set('admin_session', token!, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 60 * 30, // 30 minutes
+            path: '/',
+        });
+
+        return response;
     }
 
     return NextResponse.next();
