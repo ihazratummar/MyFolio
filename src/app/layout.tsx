@@ -10,8 +10,8 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hazratdev.top"),
-  title: "Hazrat Ummar Shaikh | Full Stack & Android Developer",
-  description: "Portfolio of Hazrat Ummar Shaikh, an expert Android App Developer, Discord Bot Developer, and Full Stack Web Developer from India. Specializing in Kotlin, Next.js, and React Native.",
+  title: "Hazrat Ummar Shaikh | Native Android & Backend Developer",
+  description: "Portfolio of Hazrat Ummar Shaikh, an expert Native Android App Developer, Backend Developer, and Discord Bot Developer from India. Specializing in Kotlin, FastAPI, KTOR, and MongoDB.",
   keywords: [
     "Hazrat Ummar Shaikh",
     "Hazrat Ummar",
@@ -21,7 +21,9 @@ export const metadata: Metadata = {
     "Mobile App Developer",
     "Discord Bot Developer",
     "Indian Developer",
-    "Full Stack Developer",
+    "Native Android Developer",
+    "Backend Developer",
+    "Discord Bot Developer",
     "Next.js Developer",
     "React Native Developer",
     "Kotlin Developer",
@@ -36,8 +38,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://hazrat.dev",
-    title: "Hazrat Ummar Shaikh | Full Stack & Android Developer",
-    description: "Portfolio of Hazrat Ummar Shaikh, an expert Android App Developer, Discord Bot Developer, and Full Stack Web Developer from India.",
+    title: "Hazrat Ummar Shaikh | Native Android & Backend Developer",
+    description: "Portfolio of Hazrat Ummar Shaikh, an expert Native Android App Developer, Backend Developer, and Discord Bot Developer from India.",
     siteName: "Hazrat Ummar Shaikh Portfolio",
     images: [
       {
@@ -50,8 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hazrat Ummar Shaikh | Full Stack & Android Developer",
-    description: "Portfolio of Hazrat Ummar Shaikh, an expert Android App Developer, Discord Bot Developer, and Full Stack Web Developer from India.",
+    title: "Hazrat Ummar Shaikh | Native Android & Backend Developer",
+    description: "Portfolio of Hazrat Ummar Shaikh, an expert Native Android App Developer, Backend Developer, and Discord Bot Developer from India.",
     images: ["/logo.png"],
     creator: "@ihazratummar9",
   },
@@ -82,7 +84,7 @@ const jsonLd = {
     "https://x.com/ihazratummar9",
     "https://www.instagram.com/hazratummar/"
   ],
-  jobTitle: "Full Stack Developer",
+  jobTitle: "Native Android & Backend Developer",
   worksFor: {
     "@type": "Organization",
     name: "Freelance"

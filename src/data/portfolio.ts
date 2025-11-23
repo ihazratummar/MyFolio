@@ -49,9 +49,9 @@ socialLinks[4].icon = MessageSquare;
 
 export const about = {
     name: "Hazrat Ummar Shaikh",
-    role: "Full Stack Developer",
-    headline: "Building Digital Experiences That Matter",
-    description: "I'm a passionate developer specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products.",
+    role: "Native Android & Backend Developer",
+    headline: "Building Things That Actually Work",
+    description: "I'm a self-taught developer who believes in solving real problems with code. No fancy degrees — just curiosity, late-night experiments, and the discipline to master what I set out to learn.",
     avatar: "/avatar.png", // Placeholder
 };
 

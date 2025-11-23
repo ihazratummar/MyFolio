@@ -39,7 +39,10 @@ export const About = () => {
                             {about.description}
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
-                            I started my journey as a curious tinkerer and evolved into a full-stack developer passionate about automation and user experience. I believe in writing clean, maintainable code and building systems that solve real-world problems.
+                            Over the years, I've become fluent in <span className="text-primary font-semibold">Kotlin, Jetpack Compose, Ktor, Python, FastAPI</span>, and everything that comes with turning an idea into a working product. I've built complete Android apps, backends, complex APIs, and AI-powered Discord bots with features like activity tracking, image generation, and Stripe integrations.
+                        </p>
+                        <p className="text-muted-foreground leading-relaxed mt-4">
+                            My strongest quality? I don't wait for someone to teach me. I open the docs, break things, fix them, and build again — until I master it. Everything I know today is the result of self-learning and discipline.
                         </p>
                     </motion.div>
 
@@ -80,7 +83,7 @@ export const About = () => {
                             <span className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-primary border-4 border-background" />
                             <h4 className="text-xl font-bold">Freelance Developer</h4>
                             <span className="text-sm text-primary">2021 - Present</span>
-                            <p className="text-muted-foreground mt-2">Specializing in custom Discord bots, automation systems, and high-performance Android applications for diverse clients worldwide.</p>
+                            <p className="text-muted-foreground mt-2">Building custom Discord bots, Native Android apps, and backend systems for clients worldwide. 4+ years of experience in Discord bot development, server setup, and automation.</p>
                         </div>
                     </div>
                 </motion.div>

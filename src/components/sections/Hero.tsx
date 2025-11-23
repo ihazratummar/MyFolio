@@ -26,10 +26,10 @@ export const Hero = () => {
                     </span>
 
                     <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tight mb-6">
-                        Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary drop-shadow-sm">Hazrat</span>
+                        Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-primary">Hazrat</span>
                         <br />
                         <span className="text-4xl md:text-6xl text-foreground/90">
-                            Full Stack Developer
+                            Native Android & Backend Developer
                         </span>
                     </h1>
 
