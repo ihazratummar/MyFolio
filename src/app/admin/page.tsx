@@ -1,7 +1,7 @@
 import React from "react";
 import dbConnect from "@/lib/db";
 import Project from "@/models/Project";
-import Service from "@/models/Service";
+
 import Testimonial from "@/models/Testimonial";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FolderKanban, Briefcase, MessageSquare } from "lucide-react";
@@ -12,7 +12,7 @@ export default async function AdminDashboard() {
     await dbConnect();
 
     const projectCount = await Project.countDocuments();
-    const serviceCount = await Service.countDocuments();
+
     const testimonialCount = await Testimonial.countDocuments();
 
     const stats = [
@@ -23,13 +23,7 @@ export default async function AdminDashboard() {
             color: "text-blue-500",
             bg: "bg-blue-500/10",
         },
-        {
-            name: "Active Services",
-            value: serviceCount,
-            icon: Briefcase,
-            color: "text-purple-500",
-            bg: "bg-purple-500/10",
-        },
+
         {
             name: "Testimonials",
             value: testimonialCount,
