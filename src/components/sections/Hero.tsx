@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export const Hero = () => {
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32">
             {/* Background Effects - Hidden on mobile for performance */}
             <div className="absolute inset-0 z-0 hidden md:block">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse-glow" />
@@ -25,15 +25,15 @@ export const Hero = () => {
                         Available for Freelance Projects
                     </span>
 
-                    <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tight mb-6">
+                    <h1 className="text-4xl md:text-7xl font-bold font-heading tracking-tight mb-6">
                         Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-primary">Hazrat</span>
                         <br />
-                        <span className="text-4xl md:text-6xl text-foreground/90">
+                        <span className="text-3xl md:text-6xl text-foreground/90">
                             Native Android & Backend Developer
                         </span>
                     </h1>
 
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+                    <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
                         I build high-performance Discord bots, automation systems, and mobile apps that help businesses scale.
                     </p>
 
@@ -52,12 +52,12 @@ export const Hero = () => {
                 </motion.div>
             </div>
 
-            {/* Scroll Indicator */}
+            {/* Scroll Indicator - Hidden on very small screens */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden sm:block"
             >
                 <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
                     <div className="w-1 h-2 bg-primary rounded-full animate-scroll" />

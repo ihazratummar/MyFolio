@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Github, ExternalLink, Smartphone, ChevronLeft, ChevronRight, MessageSquare, Send } from "lucide-react";
+import Image from "next/image";
 
 interface Project {
     _id: string;
@@ -185,10 +186,12 @@ export const Projects = () => {
                                         {/* Project Image */}
                                         <div className="absolute inset-0 flex items-center justify-center text-muted-foreground bg-white/5 group-hover:scale-105 transition-transform duration-500">
                                             {(project.images && project.images.length > 0) || project.image ? (
-                                                <img
-                                                    src={(project.images && project.images.length > 0) ? project.images[currentImageIndices[project.id] || 0] : project.image}
+                                                <Image
+                                                    src={(project.images && project.images.length > 0) ? project.images[currentImageIndices[project.id] || 0] : project.image || ""}
                                                     alt={project.title}
-                                                    className="w-full h-full object-cover"
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 />
                                             ) : (
                                                 <span>No Image</span>
@@ -284,10 +287,13 @@ export const Projects = () => {
                                     <div className="relative w-full h-full max-h-[600px] rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-muted/20">
                                         {(selectedProject.images && selectedProject.images.length > 0) || selectedProject.image ? (
                                             <>
-                                                <img
-                                                    src={(selectedProject.images && selectedProject.images.length > 0) ? selectedProject.images[currentImageIndices[selectedProject.id] || 0] : selectedProject.image}
+                                                <Image
+                                                    src={(selectedProject.images && selectedProject.images.length > 0) ? selectedProject.images[currentImageIndices[selectedProject.id] || 0] : selectedProject.image || ""}
                                                     alt={selectedProject.title}
-                                                    className="w-full h-full object-contain bg-black/50"
+                                                    fill
+                                                    className="object-contain bg-black/50"
+                                                    sizes="(max-width: 1200px) 100vw, 800px"
+                                                    priority
                                                 />
                                                 {selectedProject.images && selectedProject.images.length > 1 && (
                                                     <>
