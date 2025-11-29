@@ -76,18 +76,18 @@ export const ServiceDetailsModal = ({ children, serviceType }: { children: React
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[800px] bg-card/95 backdrop-blur-xl border-white/10 text-foreground p-0 overflow-hidden">
-                <div className="p-6 border-b border-white/10 bg-white/5 flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-lg ${details.bg} flex items-center justify-center ${details.color}`}>
+            <DialogContent className="sm:max-w-[800px] w-[95vw] max-h-[90vh] bg-card/95 backdrop-blur-xl border-white/10 text-foreground p-0 overflow-hidden flex flex-col">
+                <div className="p-6 border-b border-white/10 bg-white/5 flex items-center gap-4 shrink-0">
+                    <div className={`w-12 h-12 rounded-lg ${details.bg} flex items-center justify-center ${details.color} shrink-0`}>
                         <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                        <DialogTitle className="text-2xl font-bold">{serviceType}</DialogTitle>
-                        <p className="text-muted-foreground text-sm">{details.description}</p>
+                        <DialogTitle className="text-xl md:text-2xl font-bold">{serviceType}</DialogTitle>
+                        <p className="text-muted-foreground text-xs md:text-sm line-clamp-2">{details.description}</p>
                     </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 overflow-y-auto custom-scrollbar flex-grow">
                     <div className="mb-8">
                         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                             <Layers className="w-5 h-5 text-primary" />
@@ -103,7 +103,7 @@ export const ServiceDetailsModal = ({ children, serviceType }: { children: React
                         </div>
                     </div>
 
-                    <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 mb-8 relative overflow-hidden">
+                    <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 mb-2 relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-4 opacity-10">
                             <Zap className="w-24 h-24" />
                         </div>
@@ -113,15 +113,15 @@ export const ServiceDetailsModal = ({ children, serviceType }: { children: React
                             Let's discuss exactly what you need and build something amazing together.
                         </p>
                     </div>
+                </div>
 
-                    <div className="flex justify-end gap-4">
-                        <Button variant="ghost" onClick={() => setOpen(false)}>Close</Button>
-                        <HireMeModal>
-                            <Button className="bg-primary hover:bg-primary/90 text-white min-w-[150px]">
-                                Discuss Project
-                            </Button>
-                        </HireMeModal>
-                    </div>
+                <div className="p-4 border-t border-white/10 bg-black/20 shrink-0 flex justify-end gap-3">
+                    <Button variant="ghost" onClick={() => setOpen(false)}>Close</Button>
+                    <HireMeModal>
+                        <Button className="bg-primary hover:bg-primary/90 text-white min-w-[140px]">
+                            Discuss Project
+                        </Button>
+                    </HireMeModal>
                 </div>
             </DialogContent>
         </Dialog>
