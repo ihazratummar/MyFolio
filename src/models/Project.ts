@@ -7,6 +7,7 @@ const ProjectSchema = new Schema({
     tags: [{ type: String }],
     category: { type: String, required: true },
     images: [{ type: String }],
+    imageKeys: [{ type: String }], // Stores MinIO object keys for deletion
     image: { type: String }, // Deprecated: used for backward compatibility
     liveUrl: { type: String },
     githubUrl: { type: String },
