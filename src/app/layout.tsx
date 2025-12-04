@@ -10,6 +10,9 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hazratdev.top"),
+  alternates: {
+    canonical: '/',
+  },
   title: "Hazrat Ummar Shaikh | Native Android & Backend Developer",
   description: "Portfolio of Hazrat Ummar Shaikh, an expert Native Android App Developer, Backend Developer, and Discord Bot Developer from India. Specializing in Kotlin, FastAPI, KTOR, and MongoDB.",
   keywords: [
@@ -29,7 +32,14 @@ export const metadata: Metadata = {
     "Kotlin Developer",
     "Portfolio",
     "Web Developer",
-    "Software Engineer"
+    "Software Engineer",
+    "Freelance Android Developer",
+    "Freelance Discord Bot Developer",
+    "Kotlin Expert",
+    "FastAPI Developer",
+    "Ktor Developer",
+    "Mobile App Development India",
+    "Custom Discord Bots"
   ],
   authors: [{ name: "Hazrat Ummar Shaikh", url: "https://hazrat.dev" }],
   creator: "Hazrat Ummar Shaikh",
@@ -88,7 +98,45 @@ const jsonLd = {
   worksFor: {
     "@type": "Organization",
     name: "Freelance"
-  }
+  },
+  knowsAbout: [
+    "Android Development",
+    "Kotlin",
+    "Jetpack Compose",
+    "Backend Development",
+    "FastAPI",
+    "Ktor",
+    "MongoDB",
+    "Discord Bot Development",
+    "Python",
+    "Docker"
+  ],
+  offers: [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Native Android App Development",
+        "description": "High-performance native Android applications built with Kotlin and Jetpack Compose."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Discord Bot Development",
+        "description": "Custom Discord bots with advanced features, moderation tools, and API integrations."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Backend Development",
+        "description": "Robust and scalable backend systems using FastAPI, KTOR, and MongoDB."
+      }
+    }
+  ]
 };
 
 export default function RootLayout({
