@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/data/portfolio";
 import { HireMeModal } from "@/components/modals/HireMeModal";
@@ -30,8 +30,8 @@ export const Navbar = () => {
     };
 
     return (
-        <>
-            <motion.nav
+        <LazyMotion features={domAnimation}>
+            <m.nav
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -72,12 +72,12 @@ export const Navbar = () => {
                         {isMobileMenuOpen ? <X /> : <Menu />}
                     </button>
                 </div>
-            </motion.nav>
+            </m.nav>
 
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
@@ -100,9 +100,9 @@ export const Navbar = () => {
                                 </Button>
                             </HireMeModal>
                         </div>
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
-        </>
+        </LazyMotion>
     );
 };

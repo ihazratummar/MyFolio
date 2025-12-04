@@ -15,8 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
             const stat = fs.statSync(filePath)
 
             if (stat.isDirectory()) {
-                // Skip special Next.js directories and api routes
-                if (file.startsWith('_') || file.startsWith('(') || file === 'api') return
+                // Skip special Next.js directories and api routes, but allow route groups (starting with '(')
+                if (file.startsWith('_') || file === 'api') return
 
                 pages = [...pages, ...getPages(filePath, baseUrl)]
             } else {
@@ -28,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
                         .split('src/app')[1]
                         .replace('/page.tsx', '')
                         .replace('/page.js', '')
+                        // Remove route groups like (site) from the path
+                        .replace(/\/\([^)]+\)/g, '')
 
                     // Handle root page
                     if (relativePath === '') relativePath = '/'

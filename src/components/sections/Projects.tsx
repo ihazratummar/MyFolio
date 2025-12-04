@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -134,138 +134,140 @@ export const Projects = () => {
     return (
         <section id="projects" className="py-20 bg-black/20">
             <div className="container mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-12 text-center"
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold font-heading mb-4">
-                        Featured <span className="text-secondary">Projects</span>
-                    </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                        A selection of my best work, ranging from automation systems to mobile applications.
-                    </p>
+                <LazyMotion features={domAnimation}>
+                    <m.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="mb-12 text-center"
+                    >
+                        <h2 className="text-3xl md:text-5xl font-bold font-heading mb-4">
+                            Featured <span className="text-secondary">Projects</span>
+                        </h2>
+                        <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                            A selection of my best work, ranging from automation systems to mobile applications.
+                        </p>
 
-                    <Tabs defaultValue="All" className="w-full max-w-3xl mx-auto" onValueChange={setActiveTab}>
-                        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-white/5 p-1 rounded-xl">
-                            {categories.map((category) => (
-                                <TabsTrigger
-                                    key={category}
-                                    value={category}
-                                    className="data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
-                                >
-                                    {category}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
-                    </Tabs>
-                </motion.div>
+                        <Tabs defaultValue="All" className="w-full max-w-3xl mx-auto" onValueChange={setActiveTab}>
+                            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-white/5 p-1 rounded-xl">
+                                {categories.map((category) => (
+                                    <TabsTrigger
+                                        key={category}
+                                        value={category}
+                                        className="data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
+                                    >
+                                        {category}
+                                    </TabsTrigger>
+                                ))}
+                            </TabsList>
+                        </Tabs>
+                    </m.div>
 
-                <motion.div
-                    layout
-                    className="grid grid-rows-2 grid-flow-col gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 auto-cols-[300px] md:auto-cols-[350px]"
-                >
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
-                            <motion.div
-                                layout
-                                key={project.id}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
-                                className="snap-center h-full"
-                            >
-                                <Card
-                                    className="bg-card/50 backdrop-blur-sm border-white/10 overflow-hidden hover:border-primary/50 transition-all duration-300 group h-full flex flex-col cursor-pointer"
-                                    onClick={() => openProjectDetails(project)}
+                    <m.div
+                        layout
+                        className="grid grid-rows-2 grid-flow-col gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 auto-cols-[300px] md:auto-cols-[350px]"
+                    >
+                        <AnimatePresence mode="popLayout">
+                            {filteredProjects.map((project) => (
+                                <m.div
+                                    layout
+                                    key={project.id}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="snap-center h-full"
                                 >
-                                    <div className="relative h-48 w-full overflow-hidden bg-muted">
-                                        {/* Project Image */}
-                                        <div className="absolute inset-0 flex items-center justify-center text-muted-foreground bg-white/5 group-hover:scale-105 transition-transform duration-500">
-                                            {(project.images && project.images.length > 0) || project.image ? (
-                                                <Image
-                                                    src={(project.images && project.images.length > 0) ? project.images[currentImageIndices[project.id] || 0] : project.image || ""}
-                                                    alt={project.title}
-                                                    fill
-                                                    className="object-cover"
-                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                />
-                                            ) : (
-                                                <span>No Image</span>
+                                    <Card
+                                        className="bg-card/50 backdrop-blur-sm border-white/10 overflow-hidden hover:border-primary/50 transition-all duration-300 group h-full flex flex-col cursor-pointer"
+                                        onClick={() => openProjectDetails(project)}
+                                    >
+                                        <div className="relative h-48 w-full overflow-hidden bg-muted">
+                                            {/* Project Image */}
+                                            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground bg-white/5 group-hover:scale-105 transition-transform duration-500">
+                                                {(project.images && project.images.length > 0) || project.image ? (
+                                                    <Image
+                                                        src={(project.images && project.images.length > 0) ? project.images[currentImageIndices[project.id] || 0] : project.image || ""}
+                                                        alt={project.title}
+                                                        fill
+                                                        className="object-cover"
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    />
+                                                ) : (
+                                                    <span>No Image</span>
+                                                )}
+                                            </div>
+
+                                            {/* Overlay with Links */}
+                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10">
+                                                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                                    <Button size="icon" variant="secondary" className="rounded-full">
+                                                        <Github className="w-5 h-5" />
+                                                    </Button>
+                                                </a>
+                                                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                                                    <Button size="icon" className="rounded-full bg-primary text-white hover:bg-primary/90">
+                                                        {project.liveUrl && project.liveUrl.includes("play.google.com") ? (
+                                                            <Smartphone className="w-5 h-5" />
+                                                        ) : (
+                                                            <ExternalLink className="w-5 h-5" />
+                                                        )}
+                                                    </Button>
+                                                </a>
+                                            </div>
+
+                                            {/* Slider Controls */}
+                                            {project.images && project.images.length > 1 && (
+                                                <>
+                                                    <button
+                                                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); prevImage(project._id, project.images.length); }}
+                                                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 p-1 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-black/70"
+                                                    >
+                                                        <ChevronLeft className="w-4 h-4" />
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); nextImage(project._id, project.images.length); }}
+                                                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 p-1 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-black/70"
+                                                    >
+                                                        <ChevronRight className="w-4 h-4" />
+                                                    </button>
+                                                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        {project.images.map((_, idx) => (
+                                                            <div
+                                                                key={idx}
+                                                                className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === (currentImageIndices[project._id] || 0) ? 'bg-white' : 'bg-white/50'}`}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </>
                                             )}
                                         </div>
-
-                                        {/* Overlay with Links */}
-                                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10">
-                                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                                <Button size="icon" variant="secondary" className="rounded-full">
-                                                    <Github className="w-5 h-5" />
-                                                </Button>
-                                            </a>
-                                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                                <Button size="icon" className="rounded-full bg-primary text-white hover:bg-primary/90">
-                                                    {project.liveUrl && project.liveUrl.includes("play.google.com") ? (
-                                                        <Smartphone className="w-5 h-5" />
-                                                    ) : (
-                                                        <ExternalLink className="w-5 h-5" />
-                                                    )}
-                                                </Button>
-                                            </a>
-                                        </div>
-
-                                        {/* Slider Controls */}
-                                        {project.images && project.images.length > 1 && (
-                                            <>
-                                                <button
-                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); prevImage(project._id, project.images.length); }}
-                                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 p-1 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-black/70"
-                                                >
-                                                    <ChevronLeft className="w-4 h-4" />
-                                                </button>
-                                                <button
-                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); nextImage(project._id, project.images.length); }}
-                                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 p-1 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-black/70"
-                                                >
-                                                    <ChevronRight className="w-4 h-4" />
-                                                </button>
-                                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                    {project.images.map((_, idx) => (
-                                                        <div
-                                                            key={idx}
-                                                            className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === (currentImageIndices[project._id] || 0) ? 'bg-white' : 'bg-white/50'}`}
-                                                        />
-                                                    ))}
-                                                </div>
-                                            </>
-                                        )}
-                                    </div>
-                                    <CardHeader>
-                                        <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="flex-grow">
-                                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                                            {project.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tags.map((tag, i) => (
-                                                <Badge key={i} variant="outline" className="bg-white/5 border-white/10 hover:bg-white/10">
-                                                    {tag}
-                                                </Badge>
-                                            ))}
-                                        </div>
-                                        <div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-                                            <MessageSquare className="w-3 h-3" />
-                                            <span>{project.commentCount || 0} Comments</span>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                                        <CardHeader>
+                                            <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="flex-grow">
+                                            <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                                                {project.description}
+                                            </p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.tags.map((tag, i) => (
+                                                    <Badge key={i} variant="outline" className="bg-white/5 border-white/10 hover:bg-white/10">
+                                                        {tag}
+                                                    </Badge>
+                                                ))}
+                                            </div>
+                                            <div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
+                                                <MessageSquare className="w-3 h-3" />
+                                                <span>{project.commentCount || 0} Comments</span>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </m.div>
+                            ))}
+                        </AnimatePresence>
+                    </m.div>
+                </LazyMotion>
             </div>
 
             <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>

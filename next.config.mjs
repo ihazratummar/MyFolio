@@ -9,6 +9,9 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    compress: true,
+    poweredByHeader: false,
+    reactStrictMode: true,
     images: {
         remotePatterns: [
             {
