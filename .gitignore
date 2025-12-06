@@ -71,3 +71,5 @@ lerna-debug.log*
 
 # ESLint
 .eslintcache
+
+errors.md

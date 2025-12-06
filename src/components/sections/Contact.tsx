@@ -127,7 +127,7 @@ export const Contact = () => {
                                     </div>
                                     <div>
                                         <h4 className="font-medium mb-1">Email Me</h4>
-                                        <a href="mailto:hazratummar9@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                        <a href="mailto:hazratummar9@gmail.com" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email Me">
                                             hazratummar9@gmail.com
                                         </a>
                                     </div>
@@ -153,6 +153,7 @@ export const Contact = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-green-600/20 to-green-500/20 hover:from-green-600/30 hover:to-green-500/30 border border-green-500/30 transition-all group"
+                                            aria-label="Fiverr Profile"
                                         >
                                             <span className="font-medium text-green-400 transition-colors">Fiverr</span>
                                             <ExternalLink className="w-4 h-4 text-green-400 group-hover:text-green-300 transition-colors" />
@@ -166,6 +167,7 @@ export const Contact = () => {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all group"
+                                                aria-label={`${link.name} Profile`}
                                             >
                                                 <span className={`font-medium ${link.color} transition-colors`}>{link.name}</span>
                                                 <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />

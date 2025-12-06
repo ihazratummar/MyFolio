@@ -35,7 +35,7 @@ export const Footer = async () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={`text-muted-foreground transition-colors ${social.color}`}
-                                aria-label={social.name}
+                                aria-label={`${social.name} Profile`}
                             >
                                 <Icon className="w-6 h-6" />
                             </a>

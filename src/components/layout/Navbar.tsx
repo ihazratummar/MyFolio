@@ -68,6 +68,7 @@ export const Navbar = () => {
                     <button
                         className="md:hidden text-foreground"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label="Toggle menu"
                     >
                         {isMobileMenuOpen ? <X /> : <Menu />}
                     </button>
